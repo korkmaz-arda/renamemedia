@@ -9,6 +9,8 @@ from mutagen.mp4 import MP4
 
 
 def rename_media_files(media_dir, accepted_formats=['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma']):
+    renamed_files = {}
+    
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
         file_extension = filename.split('.')[-1].lower()
@@ -38,6 +40,15 @@ def rename_media_files(media_dir, accepted_formats=['mp3', 'mp4', 'flac', 'aiff'
             if title:
                 sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
                 new_path = os.path.join(media_dir, f"{sanitized_title}.{file_extension}")
+
+                base_title = sanitized_title
+                counter = 1
+                while new_path in renamed_files:
+                    counter += 1
+                    sanitized_title = f"{base_title}_{counter}"
+                    new_path = os.path.join(media_dir, f"{sanitized_title}.{file_extension}")
+
+                renamed_files[new_path] = counter
 
                 if full_path == new_path:
                     print(f"File '{filename}' already has the correct name.")
