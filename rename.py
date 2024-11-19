@@ -8,14 +8,14 @@ from mutagen.asf import ASF
 from mutagen.mp4 import MP4
 
 
-def rename_media_files(media_dir, accepted_formats=['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma']):
+def rename_media_files(media_dir, supported_formats=['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma']):
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
         file_extension = filename.split('.')[-1].lower()
 
-        if file_extension not in accepted_formats:
+        if file_extension not in supported_formats:
             continue
 
         try:
