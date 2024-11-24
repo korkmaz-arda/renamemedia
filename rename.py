@@ -1,4 +1,5 @@
 import os
+import sys
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
@@ -61,3 +62,18 @@ def rename_media_files(media_dir, supported_formats=['mp3', 'mp4', 'flac', 'aiff
 
         except Exception as e:
             print(f"Could not process '{filename}': {e}")
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("The script needs a target directory to work on.")
+        print("Usage: python rename.py /path/to/media/directory")
+        sys.exit(1)
+
+    media_dir = sys.argv[1]
+
+    if not os.path.isdir(media_dir):
+        print(f"The specified directory does not exist: {media_dir}")
+        sys.exit(1)
+
+    rename_media_files(media_dir)
