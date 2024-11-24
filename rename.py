@@ -39,9 +39,8 @@ def rename_media_files(media_dir, supported_formats=['mp3', 'mp4', 'flac', 'aiff
                 print(f"Skipping unsupported file format '{filename}'")
                 continue
 
-            # title = audio.get("title", [None])[0]
             title = audio.tags.get("title", [None])[0]
-            
+
             if title:
                 sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
                 new_path = os.path.join(media_dir, f"{sanitized_title}.{file_extension}")
