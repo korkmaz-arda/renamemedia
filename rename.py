@@ -9,8 +9,10 @@ from mutagen.asf import ASF
 from mutagen.mp4 import MP4
 from mutagen.wave import WAVE
 
+SUPPORTED_FORMATS = ['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 
-def rename_media_files(media_dir, supported_formats=['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']):
+
+def rename_media_files(media_dir, supported_formats=SUPPORTED_FORMATS):
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
