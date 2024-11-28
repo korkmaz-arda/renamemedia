@@ -12,7 +12,7 @@ from mutagen.wave import WAVE
 SUPPORTED_FORMATS = ['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 
 
-def rename_media_files(media_dir, formats=SUPPORTED_FORMATS):
+def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
@@ -60,8 +60,11 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS):
                     print(f"File '{filename}' already has the correct name.")
                     continue
 
-                os.rename(full_path, new_path)
-                print(f"Renamed '{filename}' to '{sanitized_title}.{file_extension}'")
+                if dry_run:
+                    print(f"[DRY-RUN] Would rename '{filename}' to '{sanitized_title}.{file_extension}'")
+                else:
+                    os.rename(full_path, new_path)
+                    print(f"Renamed '{filename}' to '{sanitized_title}.{file_extension}'")
             else:
                 print(f"No title tag found for '{filename}', skipping.")
 
