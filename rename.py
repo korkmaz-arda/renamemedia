@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
@@ -73,13 +74,21 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("The script needs a target directory to work on.")
-        print("Usage: python rename.py /path/to/media/directory")
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description="Rename media files based on their metadata.")
+    parser.add_argument(
+        "media_dir",
+        type=str,
+        help="Path to the directory containing media files."
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Simulate renaming without making changes."
+    )
 
-    media_dir = sys.argv[1]
+    args = parser.parse_args()
 
+    media_dir = args.media_dir
     if not os.path.isdir(media_dir):
         print(f"The specified directory does not exist: {media_dir}")
         sys.exit(1)
