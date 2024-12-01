@@ -71,26 +71,3 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
 
         except Exception as e:
             print(f"Could not process '{filename}': {e}")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Rename media files based on their metadata.")
-    parser.add_argument(
-        "media_dir",
-        type=str,
-        help="Path to the directory containing media files."
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Simulate renaming without making changes."
-    )
-
-    args = parser.parse_args()
-
-    media_dir = args.media_dir
-    if not os.path.isdir(media_dir):
-        print(f"The specified directory does not exist: {media_dir}")
-        sys.exit(1)
-
-    rename_media_files(media_dir)
