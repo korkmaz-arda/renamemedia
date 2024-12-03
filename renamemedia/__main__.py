@@ -1,8 +1,7 @@
-from rename import rename_media_files
+from .rename import rename_media_files
 import argparse
 import sys
 import os
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Rename media files based on their metadata.")
