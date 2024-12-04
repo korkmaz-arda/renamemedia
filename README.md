@@ -13,11 +13,11 @@ pip install git+https://github.com/korkmaz-arda/renamemedia.git
 ## Usage
 To rename your media files in `/to/path/`:
 ```
-python -m renamemedia /to/path
+python -m renamemedia /to/path/
 ```
 
 
 To perform a dry run without making actual changes:
 ```
-python -m renamemedia /to/path --dry-run
+python -m renamemedia /to/path/ --dry-run
 ```
