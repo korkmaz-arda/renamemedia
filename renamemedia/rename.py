@@ -49,7 +49,7 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
                 new_path = os.path.join(media_dir, f"{sanitized_title}.{file_extension}")
 
                 base_title = sanitized_title
-                counter = 1
+                counter = renamed_files.get(new_path, 1)
                 while new_path in renamed_files:
                     counter += 1
                     sanitized_title = f"{base_title}_{counter}"
