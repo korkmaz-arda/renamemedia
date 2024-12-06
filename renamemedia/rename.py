@@ -21,6 +21,7 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
         file_extension = filename.split('.')[-1].lower()
 
         if file_extension not in formats:
+            print(f"Unsupported file format: '{file_extension}'")
             continue
 
         try:
