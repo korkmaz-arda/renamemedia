@@ -15,6 +15,11 @@ if __name__ == "__main__":
         action="store_true",
         help="Simulate renaming without making changes."
     )
+    parser.add_argument(
+        "--extensions",
+        nargs="+",
+        help="List of file extensions to process (e.g., mp3 flac). Defaults to all supported formats."
+    )
 
     args = parser.parse_args()
 
