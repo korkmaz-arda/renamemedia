@@ -7,7 +7,7 @@ setup(
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     author="Arda Korkmaz",
-    url="https://github.com/korkmaz-arda/korkmaz-arda",
+    url="https://github.com/korkmaz-arda/renamemedia",
     license="MIT",
     packages=find_packages(),
     install_requires=[
