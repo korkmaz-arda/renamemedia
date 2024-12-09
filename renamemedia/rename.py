@@ -11,7 +11,7 @@ from mutagen.mp4 import MP4
 from mutagen.wave import WAVE
 
 SUPPORTED_FORMATS = ['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
-
+#
 
 def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
     renamed_files = {}
