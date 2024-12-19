@@ -12,7 +12,7 @@ pip install git+https://github.com/korkmaz-arda/renamemedia.git
 
 
 ## Requirements
-- `mutagen>=1.45`
+- `mutagen >= 1.45`
 
 
 ## Usage
@@ -24,5 +24,5 @@ python -m renamemedia /to/path/
 
 To perform a dry run without making actual changes:
 ```
-python -m renamemedia /to/path/ --dry-run
+python -m renamemedia --dry-run /to/path/
 ```
