@@ -10,6 +10,11 @@ Install `renamemedia` directly from GitHub:
 pip install git+https://github.com/korkmaz-arda/renamemedia.git
 ```
 
+
+## Requirements
+- `mutagen>=1.45`
+
+
 ## Usage
 To rename your media files in `/to/path/`:
 ```
