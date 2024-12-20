@@ -14,14 +14,17 @@ SUPPORTED_FORMATS = ['mp3', 'mp4', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 
 
 def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
+    if formats is None:
+        formats = SUPPORTED_FORMATS
+
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
         file_extension = filename.split('.')[-1].lower()
-
+                
         if file_extension not in formats:
-            print(f"Unsupported file format: '{file_extension}'")
+            print(f"Unsupported file format: '{file_extension}' ({filename})")
             continue
 
         try:
