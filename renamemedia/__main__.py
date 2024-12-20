@@ -18,7 +18,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--extensions",
         nargs="+",
-        help="List of file extensions to process (e.g., mp3 flac). Defaults to all supported formats."
+        help="Filter files by extensions (e.g., mp3 flac). Defaults to all supported formats."
     )
 
     args = parser.parse_args()
