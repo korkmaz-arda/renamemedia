@@ -28,4 +28,4 @@ if __name__ == "__main__":
         print(f"The specified directory does not exist: {media_dir}")
         sys.exit(1)
 
-    rename_media_files(media_dir, dry_run=args.dry_run)
+    rename_media_files(media_dir, formats=args.extensions, dry_run=args.dry_run)
