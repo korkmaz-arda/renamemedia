@@ -26,3 +26,9 @@ To perform a dry run without making actual changes:
 ```
 python -m renamemedia --dry-run /to/path/
 ```
+
+To limit the operation to specific file extensions:
+```
+python -m renamemedia --dry-run /to/path/ --extensions mp3
+python -m renamemedia --dry-run /to/path/ --extensions mp3 flac
+```
