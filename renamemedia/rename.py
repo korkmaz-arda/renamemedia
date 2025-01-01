@@ -42,6 +42,9 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
                 audio = ASF(full_path)
             elif file_extension == "wav":
                 audio = WAVE(full_path)
+            elif file_extension == "aac":
+                print(f"Unable to rename '{filename}', '.aac' files don't contain relevant metadata.")
+                continue
             else:
                 print(f"Skipping unsupported file format '{filename}'")
                 continue
