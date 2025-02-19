@@ -2,12 +2,12 @@ import os
 import sys
 import argparse
 from mutagen.mp3 import MP3
+from mutagen.mp4 import MP4
 from mutagen.easyid3 import EasyID3
 from mutagen.flac import FLAC
 from mutagen.aiff import AIFF
 from mutagen.ogg import OggFileType
 from mutagen.asf import ASF
-from mutagen.mp4 import MP4
 from mutagen.wave import WAVE
 
 SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav', 'aac']
