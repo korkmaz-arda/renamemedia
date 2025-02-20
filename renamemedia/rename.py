@@ -49,7 +49,7 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
                 print(f"Skipping unsupported file format '{filename}'")
                 continue
 
-            title = audio.tags.get("title", [None])[0]
+            title = audio.tags.get("title", [None])[0] if audio.tags else None
 
             if title:
                 sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
