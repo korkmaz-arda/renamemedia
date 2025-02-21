@@ -14,9 +14,6 @@ SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'flac', 'aiff', 'ogg', 'opus', 'wma', 
 
 
 def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
-    if formats is None:
-        formats = SUPPORTED_FORMATS
-
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
