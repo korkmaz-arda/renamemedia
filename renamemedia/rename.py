@@ -10,8 +10,8 @@ from mutagen.ogg import OggFileType
 from mutagen.asf import ASF
 from mutagen.wave import WAVE
 
-SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav', 'aac']
-
+SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
+UNSUPPORTED_FORMATS = ['aac']
 
 def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
     renamed_files = {}
@@ -25,6 +25,9 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
             continue
 
         try:
+            if file_extension in UNSUPPORTED_FORMATS:
+                print(f"Unable to rename '{filename}', '.{file_extension}' files don't contain relevant metadata.")
+                continue
             if file_extension == "mp3":
                 audio = MP3(full_path, ID3=EasyID3)
             elif file_extension == ["mp4", "m4a"]:
@@ -39,9 +42,6 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
                 audio = ASF(full_path)
             elif file_extension == "wav":
                 audio = WAVE(full_path)
-            elif file_extension == "aac":
-                print(f"Unable to rename '{filename}', '.aac' files don't contain relevant metadata.")
-                continue
             else:
                 print(f"Skipping unsupported file format '{filename}'")
                 continue
