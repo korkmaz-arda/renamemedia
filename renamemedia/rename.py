@@ -18,46 +18,46 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
     
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
-        file_extension = filename.split('.')[-1].lower()
+        file_ext = filename.split('.')[-1].lower()
                 
-        if file_extension not in formats:
-            print(f"Unsupported file format: '{file_extension}' ({filename})")
+        if file_ext not in formats:
+            print(f"Unsupported file format: '{file_ext}' ({filename})")
             continue
 
         try:
-            if file_extension in UNSUPPORTED_FORMATS:
-                print(f"Unable to rename '{filename}', '.{file_extension}' files don't contain relevant metadata.")
+            if file_ext in UNSUPPORTED_FORMATS:
+                print(f"Unable to rename '{filename}': '.{file_ext}' files don't contain relevant metadata.")
                 continue
-            if file_extension == "mp3":
+            if file_ext == "mp3":
                 audio = MP3(full_path, ID3=EasyID3)
-            elif file_extension == ["mp4", "m4a"]:
+            elif file_ext == ["mp4", "m4a"]:
                 audio = MP4(full_path)
-            elif file_extension == "flac":
+            elif file_ext == "flac":
                 audio = FLAC(full_path)
-            elif file_extension == "aiff":
+            elif file_ext == "aiff":
                 audio = AIFF(full_path)
-            elif file_extension in ["ogg", "opus"]:
+            elif file_ext in ["ogg", "opus"]:
                 audio = OggFileType(full_path)
-            elif file_extension == "wma":
+            elif file_ext == "wma":
                 audio = ASF(full_path)
-            elif file_extension == "wav":
+            elif file_ext == "wav":
                 audio = WAVE(full_path)
             else:
-                print(f"Skipping unsupported file format '{filename}'")
+                print(f"Skipping: '{filename}'")
                 continue
 
             title = audio.tags.get("title", [None])[0] if audio.tags else None
 
             if title:
                 sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
-                new_path = os.path.join(media_dir, f"{sanitized_title}.{file_extension}")
+                new_path = os.path.join(media_dir, f"{sanitized_title}.{file_ext}")
 
                 base_title = sanitized_title
                 counter = renamed_files.get(new_path, 1)
                 while new_path in renamed_files:
                     counter += 1
                     sanitized_title = f"{base_title}_{counter}"
-                    new_path = os.path.join(media_dir, f"{sanitized_title}.{file_extension}")
+                    new_path = os.path.join(media_dir, f"{sanitized_title}.{file_ext}")
 
                 renamed_files[new_path] = counter
 
@@ -66,10 +66,10 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
                     continue
 
                 if dry_run:
-                    print(f"[DRY-RUN] Would rename '{filename}' to '{sanitized_title}.{file_extension}'")
+                    print(f"[DRY-RUN] Would rename '{filename}' to '{sanitized_title}.{file_ext}'")
                 else:
                     os.rename(full_path, new_path)
-                    print(f"Renamed '{filename}' to '{sanitized_title}.{file_extension}'")
+                    print(f"Renamed '{filename}' to '{sanitized_title}.{file_ext}'")
             else:
                 print(f"No title tag found for '{filename}', skipping.")
 
