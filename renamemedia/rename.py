@@ -26,7 +26,7 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
 
         try:
             if file_ext in UNSUPPORTED_FORMATS:
-                print(f"Unable to rename '{filename}': '.{file_ext}' files don't contain relevant metadata.")
+                print(f"Unable to rename '{filename}': format not supported.")
                 continue
             if file_ext == "mp3":
                 audio = MP3(full_path, ID3=EasyID3)
