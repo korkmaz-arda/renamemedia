@@ -10,7 +10,7 @@ from mutagen.ogg import OggFileType
 from mutagen.asf import ASF
 from mutagen.wave import WAVE
 
-SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
+SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'mka', 'wma', 'wav']
 UNSUPPORTED_FORMATS = ['aac']
 
 def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
