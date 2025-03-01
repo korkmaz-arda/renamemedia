@@ -1,6 +1,8 @@
 import os
 import sys
 import argparse
+import ffmpeg
+
 from mutagen.mp3 import MP3
 from mutagen.mp4 import MP4
 from mutagen.easyid3 import EasyID3
@@ -10,7 +12,9 @@ from mutagen.ogg import OggFileType
 from mutagen.asf import ASF
 from mutagen.wave import WAVE
 
-SUPPORTED_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
+MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
+FFMPEG_FORMATS = []
+SUPPORTED_FORMATS = MUTAGEN_FORMATS + FFMPEG_FORMATS
 
 def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
     renamed_files = {}
@@ -24,25 +28,30 @@ def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
             continue
 
         try:
-            if file_ext == "mp3":
-                audio = MP3(full_path, ID3=EasyID3)
-            elif file_ext in ["mp4", "m4a", "alac"]:
-                audio = MP4(full_path)
-            elif file_ext == "flac":
-                audio = FLAC(full_path)
-            elif file_ext == "aiff":
-                audio = AIFF(full_path)
-            elif file_ext in ["ogg", "opus"]:
-                audio = OggFileType(full_path)
-            elif file_ext == "wma":
-                audio = ASF(full_path)
-            elif file_ext == "wav":
-                audio = WAVE(full_path)
-            else:
-                print(f"Skipping: '{filename}'")
-                continue
+            if file_ext in FFMPEG_FORMATS:
+                meta = ffmpeg.probe(full_path)
+                title = meta.get("format", {}).get("tags", {}).get("title")
 
-            title = audio.tags.get("title", [None])[0] if audio.tags else None
+            else:
+                if file_ext == "mp3":
+                    audio = MP3(full_path, ID3=EasyID3)
+                elif file_ext in ["mp4", "m4a", "alac"]:
+                    audio = MP4(full_path)
+                elif file_ext == "flac":
+                    audio = FLAC(full_path)
+                elif file_ext == "aiff":
+                    audio = AIFF(full_path)
+                elif file_ext in ["ogg", "opus"]:
+                    audio = OggFileType(full_path)
+                elif file_ext == "wma":
+                    audio = ASF(full_path)
+                elif file_ext == "wav":
+                    audio = WAVE(full_path)
+                else:
+                    print(f"Skipping: '{filename}'")
+                    continue
+
+                title = audio.tags.get("title", [None])[0] if audio.tags else None
 
             if title:
                 sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
