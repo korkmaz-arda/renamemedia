@@ -16,7 +16,11 @@ MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', '
 FFMPEG_FORMATS = []
 SUPPORTED_FORMATS = MUTAGEN_FORMATS + FFMPEG_FORMATS
 
-def rename_media_files(media_dir, formats=SUPPORTED_FORMATS, dry_run=False):
+def rename_media_files(
+    media_dir, 
+    formats=SUPPORTED_FORMATS, 
+    dry_run=False
+):
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
