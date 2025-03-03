@@ -13,7 +13,7 @@ from mutagen.asf import ASF
 from mutagen.wave import WAVE
 
 MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
-FFMPEG_FORMATS = []
+FFMPEG_FORMATS = ['mkv', 'mka']
 SUPPORTED_FORMATS = MUTAGEN_FORMATS + FFMPEG_FORMATS
 
 def rename_media_files(
