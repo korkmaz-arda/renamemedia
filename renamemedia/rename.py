@@ -1,6 +1,7 @@
 import os
 import sys
 import argparse
+
 import ffmpeg
 
 from mutagen.mp3 import MP3
