@@ -12,6 +12,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         "mutagen>=1.45",
+        "ffmpeg-python>=0.2.0"
     ],
     entry_points={
         "console_scripts": [
