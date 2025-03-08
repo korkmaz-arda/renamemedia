@@ -10,10 +10,10 @@ Install `renamemedia` directly from GitHub:
 pip install git+https://github.com/korkmaz-arda/renamemedia.git
 ```
 
-
 ## Requirements
 - `mutagen >= 1.45`
 - `ffmpeg-python >= 0.2.0`
+- System must have `ffmpeg` installed
 
 
 ## Usage
@@ -21,7 +21,6 @@ To rename your media files in `/to/path/`:
 ```
 python -m renamemedia /to/path/
 ```
-
 
 To perform a dry run without making actual changes:
 ```
