@@ -13,7 +13,8 @@ pip install git+https://github.com/korkmaz-arda/renamemedia.git
 ## Requirements
 - `mutagen >= 1.45`
 - `ffmpeg-python >= 0.2.0`
-- System must have `ffmpeg` installed
+
+> **Note:** The system must have `ffmpeg` installed.
 
 
 ## Usage
