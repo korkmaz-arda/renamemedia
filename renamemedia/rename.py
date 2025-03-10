@@ -19,10 +19,12 @@ SUPPORTED_FORMATS = MUTAGEN_FORMATS + FFMPEG_FORMATS
 
 def rename_media_files(
     media_dir, 
-    format_filter=SUPPORTED_FORMATS, 
+    format_filter=None, 
     dry_run=False
 ):
-    if format_filter
+    if format_filter is None:
+        format_filter = SUPPORTED_FORMATS
+
     renamed_files = {}
     
     for filename in os.listdir(media_dir):
