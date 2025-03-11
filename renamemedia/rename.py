@@ -15,7 +15,6 @@ from mutagen.wave import WAVE
 
 MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 FFMPEG_FORMATS = ['mkv', 'mka']
-SUPPORTED_FORMATS = MUTAGEN_FORMATS + FFMPEG_FORMATS
 
 def rename_media_files(
     media_dir, 
@@ -23,7 +22,7 @@ def rename_media_files(
     dry_run=False
 ):
     if format_filter is None:
-        format_filter = SUPPORTED_FORMATS
+        format_filter = [*MUTAGEN_FORMATS, *FFMPEG_FORMATS]
 
     renamed_files = {}
     
