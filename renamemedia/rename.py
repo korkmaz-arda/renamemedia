@@ -41,24 +41,24 @@ def rename_media_files(
 
             else:
                 if file_ext == "mp3":
-                    audio = MP3(full_path, ID3=EasyID3)
+                    media = MP3(full_path, ID3=EasyID3)
                 elif file_ext in ["mp4", "m4a", "alac"]:
-                    audio = MP4(full_path)
+                    media = MP4(full_path)
                 elif file_ext == "flac":
-                    audio = FLAC(full_path)
+                    media = FLAC(full_path)
                 elif file_ext == "aiff":
-                    audio = AIFF(full_path)
+                    media = AIFF(full_path)
                 elif file_ext in ["ogg", "opus"]:
-                    audio = OggFileType(full_path)
+                    media = OggFileType(full_path)
                 elif file_ext == "wma":
-                    audio = ASF(full_path)
+                    media = ASF(full_path)
                 elif file_ext == "wav":
-                    audio = WAVE(full_path)
+                    media = WAVE(full_path)
                 else:
                     print(f"Skipping: '{filename}'")
                     continue
 
-                title = audio.tags.get("title", [None])[0] if audio.tags else None
+                title = media.tags.get("title", [None])[0] if media.tags else None
 
             if title:
                 sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
