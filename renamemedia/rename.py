@@ -28,7 +28,9 @@ def rename_media_files(
     
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
-        file_ext = filename.split('.')[-1].lower()
+        
+        _, ext = os.path.splitext(filename)
+        file_ext = ext.lstrip('.').lower()
                 
         if file_ext not in format_filter:
             print(f"Format not supported: '.{file_ext}' ({filename})")
