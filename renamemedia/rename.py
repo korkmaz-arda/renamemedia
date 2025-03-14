@@ -29,9 +29,9 @@ def rename_media_files(
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
         
-        _, ext = os.path.splitext(filename)
+        _, ext = os.path.splitext(filename) 
         file_ext = ext.lstrip('.').lower()
-                
+                    
         if file_ext not in format_filter:
             print(f"Format not supported: '.{file_ext}' ({filename})")
             continue
@@ -40,7 +40,6 @@ def rename_media_files(
             if file_ext in FFMPEG_FORMATS:
                 meta = ffmpeg.probe(full_path)
                 title = meta.get("format", {}).get("tags", {}).get("title")
-
             else:
                 if file_ext == "mp3":
                     media = MP3(full_path, ID3=EasyID3)
@@ -59,7 +58,6 @@ def rename_media_files(
                 else:
                     print(f"Skipping: '{filename}'")
                     continue
-
                 title = media.tags.get("title", [None])[0] if media.tags else None
 
             if title:
