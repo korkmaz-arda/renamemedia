@@ -16,6 +16,9 @@ from mutagen.wave import WAVE
 MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 FFMPEG_FORMATS = ['mkv', 'mka']
 
+def sanitize_title(title):
+    return "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
+
 def rename_media_files(
     media_dir, 
     format_filter=None, 
@@ -31,7 +34,7 @@ def rename_media_files(
         
         _, ext = os.path.splitext(filename) 
         file_ext = ext.lstrip('.').lower()
-                    
+
         if file_ext not in format_filter:
             print(f"Format not supported: '.{file_ext}' ({filename})")
             continue
@@ -61,7 +64,7 @@ def rename_media_files(
                 title = media.tags.get("title", [None])[0] if media.tags else None
 
             if title:
-                sanitized_title = "".join(c for c in title if c.isalnum() or c in " -_").rstrip()
+                sanitized_title = sanitize_title(title)
                 new_path = os.path.join(media_dir, f"{sanitized_title}.{file_ext}")
 
                 base_title = sanitized_title
