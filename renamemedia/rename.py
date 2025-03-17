@@ -17,7 +17,8 @@ MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', '
 FFMPEG_FORMATS = ['mkv', 'mka']
 
 def sanitize_title(title):
-    return "".join(c for c in title if c.isalnum() or c in " -_.").rstrip()
+    allowed_chars = " -_."
+    return "".join(c for c in title if c.isalnum() or c in allowed_chars).rstrip()
 
 def rename_media_files(
     media_dir, 
