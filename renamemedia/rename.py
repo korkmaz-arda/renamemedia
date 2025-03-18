@@ -16,8 +16,9 @@ from mutagen.wave import WAVE
 MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 FFMPEG_FORMATS = ['mkv', 'mka']
 
-def sanitize_title(title):
-    allowed_chars = " -_."
+def sanitize_title(title, allowed_chars=None):
+    if allowed_chars is None:
+        allowed_chars = " -_."
     return "".join(c for c in title if c.isalnum() or c in allowed_chars).rstrip()
 
 def rename_media_files(
