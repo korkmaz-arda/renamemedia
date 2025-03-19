@@ -21,6 +21,10 @@ def sanitize_title(title, allowed_chars=None):
         allowed_chars = " -_."
     return "".join(c for c in title if c.isalnum() or c in allowed_chars).rstrip()
 
+def get_title_ffmpeg(file_path):
+    meta = ffmpeg.probe(full_path)
+    return meta.get("format", {}).get("tags", {}).get("title")
+
 def rename_media_files(
     media_dir, 
     format_filter=None, 
@@ -34,7 +38,7 @@ def rename_media_files(
     for filename in os.listdir(media_dir):
         full_path = os.path.join(media_dir, filename)
         
-        _, ext = os.path.splitext(filename) 
+        _, ext = os.path.splitext(filename)
         file_ext = ext.lstrip('.').lower()
 
         if file_ext not in format_filter:
