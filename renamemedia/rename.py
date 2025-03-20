@@ -25,7 +25,7 @@ def get_title_ffmpeg(file_path):
     meta = ffmpeg.probe(full_path)
     return meta.get("format", {}).get("tags", {}).get("title")
 
-def rename_media_files(
+def rename_media(
     media_dir, 
     format_filter=None, 
     dry_run=False
