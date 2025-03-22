@@ -13,6 +13,20 @@ from mutagen.ogg import OggFileType
 from mutagen.asf import ASF
 from mutagen.wave import WAVE
 
+
+MUTAGEN_MAP = {
+    "mp3": lambda path: MP3(path, ID3=EasyID3),
+    "mp4": MP4,
+    "m4a": MP4,
+    "alac": MP4,
+    "flac": FLAC,
+    "aiff": AIFF,
+    "ogg": OggFileType,
+    "opus": OggFileType,
+    "wma": ASF,
+    "wav": WAVE,
+}
+
 MUTAGEN_FORMATS = ['mp3', 'mp4', 'm4a', 'alac', 'flac', 'aiff', 'ogg', 'opus', 'wma', 'wav']
 FFMPEG_FORMATS = ['mkv', 'mka']
 
