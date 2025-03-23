@@ -64,6 +64,12 @@ def rename_media(
                 meta = ffmpeg.probe(full_path)
                 title = meta.get("format", {}).get("tags", {}).get("title")
             else:
+                # file_map = MUTAGEN_MAP.get(file_ext)
+                # if not file_map:
+                #   print(f"Skipping: '{filename}'")
+                #   continue
+                # media = file_map(full_path)
+
                 if file_ext == "mp3":
                     media = MP3(full_path, ID3=EasyID3)
                 elif file_ext in ["mp4", "m4a", "alac"]:
