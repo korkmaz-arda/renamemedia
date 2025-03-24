@@ -61,8 +61,7 @@ def rename_media(
 
         try:
             if file_ext in FFMPEG_FORMATS:
-                meta = ffmpeg.probe(full_path)
-                title = meta.get("format", {}).get("tags", {}).get("title")
+                title = get_title_ffmpeg(full_path)
             else:
                 # file_map = MUTAGEN_MAP.get(file_ext)
                 # if not file_map:
