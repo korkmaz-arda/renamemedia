@@ -63,29 +63,11 @@ def rename_media(
             if file_ext in FFMPEG_FORMATS:
                 title = get_title_ffmpeg(full_path)
             else:
-                # file_map = MUTAGEN_MAP.get(file_ext)
-                # if not file_map:
-                #   print(f"Skipping: '{filename}'")
-                #   continue
-                # media = file_map(full_path)
-
-                if file_ext == "mp3":
-                    media = MP3(full_path, ID3=EasyID3)
-                elif file_ext in ["mp4", "m4a", "alac"]:
-                    media = MP4(full_path)
-                elif file_ext == "flac":
-                    media = FLAC(full_path)
-                elif file_ext == "aiff":
-                    media = AIFF(full_path)
-                elif file_ext in ["ogg", "opus"]:
-                    media = OggFileType(full_path)
-                elif file_ext == "wma":
-                    media = ASF(full_path)
-                elif file_ext == "wav":
-                    media = WAVE(full_path)
-                else:
+                file_map = MUTAGEN_MAP.get(file_ext)
+                if not file_map:
                     print(f"Skipping: '{filename}'")
                     continue
+                media = file_map(full_path)
                 title = media.tags.get("title", [None])[0] if media.tags else None
 
             if title:
